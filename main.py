@@ -16,6 +16,10 @@ DIAGNOSIS = (
 
 
 def main() -> None:
+    # Mirror the scorer's gate: the text must be 1-200 characters and not
+    # only white space, or the entry is never judged.
+    if not 1 <= len(DIAGNOSIS) <= 200 or not DIAGNOSIS.strip():
+        raise ValueError("diagnosis must be 1-200 non-blank characters")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as handle:
         handle.write(DIAGNOSIS + "\n")
